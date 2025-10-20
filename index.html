@@ -1,65 +1,67 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Factorial Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-      margin: 0;
-    }
-    h1 {
-      color: #333;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      margin-right: 10px;
-    }
-    button {
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .result {
-      margin-top: 20px;
-      font-size: 22px;
-      color: #2c3e50;
-    }
-  </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Factorial Calculator</title>
+ <style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  input {
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #218838;
+  }
+  .result {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+  }
+ </style>
 </head>
 <body>
-  <h1>Factorial Calculator</h1>
-  <input type="number" id="numberInput" placeholder="Enter a non-negative integer" min="0" />
-  <button id="calculateBtn">Calculate</button>
-  <div class="result" id="resultDisplay"></div>
+ <h1>Factorial Calculator</h1>
+ <input type="number" id="numberInput" placeholder="Enter a non-negative integer" />
+ <button id="calculateBtn">Calculate</button>
+ <div class="result" id="resultDiv"></div>
 
-  <script>
-    document.getElementById('calculateBtn').addEventListener('click', function() {
-      const number = parseInt(document.getElementById('numberInput').value);
-      if (isNaN(number) || number < 0) {
-        document.getElementById('resultDisplay').innerText = 'Please enter a valid non-negative integer.';
-        return;
-      }
-      const factorial = calculateFactorial(number);
-      document.getElementById('resultDisplay').innerText = `Factorial of ${number} is ${factorial}.`;
-    });
+ <script>
+  function factorial(n) {
+    return n === 0 ? 1 : n * factorial(n - 1);
+  }
 
-    function calculateFactorial(n) {
-      if (n === 0 || n === 1) return 1;
-      let result = 1;
-      for (let i = 2; i <= n; i++) {
-        result *= i;
-      }
-      return result;
+  document.getElementById('calculateBtn').addEventListener('click', function() {
+    const input = document.getElementById('numberInput').value;
+    const number = parseInt(input);
+    const resultDiv = document.getElementById('resultDiv');
+
+    if (isNaN(number) || number < 0) {
+      resultDiv.textContent = 'Please enter a non-negative integer.';
+      return;
     }
-  </script>
+
+    const result = factorial(number);
+    resultDiv.textContent = `Factorial of ${number} is ${result}.`;
+  });
+ </script>
 </body>
 </html>
